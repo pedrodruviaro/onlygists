@@ -8,3 +8,13 @@
 - prime vue
   - https://tailwind.primevue.org/builder/
   - baixar o tema lara
+
+# Módulo 5
+
+- Supabase CLI: https://supabase.com/docs/guides/cli/getting-started?platform=windows
+- instalar docker
+- npx supabase login
+- npx supabase init
+
+- criando migrations
+  - npx supabase migration new create_profiles_table
