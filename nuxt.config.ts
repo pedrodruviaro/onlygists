@@ -1,9 +1,16 @@
-import path from 'path'
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'nuxt-primevue'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'nuxt-primevue', '@nuxtjs/supabase'],
+
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.SITE_URL,
+      nodeEnv: process.env.NODE_ENV,
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
+    },
+  },
 
   css: ['primeicons/primeicons.css'],
 
@@ -25,6 +32,10 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['./composables/useMarkdown'],
+    dirs: ['./composables/useMarkdown', './composables/useServices'],
+  },
+
+  supabase: {
+    redirect: false,
   },
 })
