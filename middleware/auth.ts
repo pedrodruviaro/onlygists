@@ -1,4 +1,4 @@
-import { useSession } from '@/modules/auth/useSession/useSession'
+import { useSession } from '~/modules/auth/composables/useSession/useSession'
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const session = useSession()
