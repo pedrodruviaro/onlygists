@@ -14,7 +14,7 @@ const nickname = computed(() => {
     return 'Usuário'
   }
 
-  const [nick] = user.value?.name.split('')
+  const [nick] = user.value?.name.split(' ')
   return nick
 })
 

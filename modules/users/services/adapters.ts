@@ -1,6 +1,7 @@
 import type { Database } from '~/libs/supabase/schema'
 import type { User } from '@/modules/users/entities/User/User'
 import type { Address } from '@/modules/users/entities/Address/Address'
+import type { SearchAddressResponse } from './types'
 
 type ProfileTable = Database['public']['Tables']['profiles']
 type Row = ProfileTable['Row']
@@ -20,5 +21,17 @@ export function getMyselfAdapter(data: Row | null): User | null {
     bio: data.bio ?? undefined,
     address,
     createdAt: new Date(data.created_at),
+  }
+}
+
+export function searchAddressByZipCodeAddapter(data: SearchAddressResponse): Address {
+  return {
+    zipCode: data.cep,
+    state: data.uf,
+    city: data.localidade,
+    street: data.logradouro,
+    complement: data.complemento,
+    neighborhood: data.bairro,
+    number: '',
   }
 }

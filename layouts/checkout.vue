@@ -15,7 +15,7 @@ const nickname = computed(() => {
     return 'Usuário'
   }
 
-  const [nick] = user.value?.name.split('')
+  const [nick] = user.value?.name.split(' ')
   return nick
 })
 
@@ -64,4 +64,3 @@ function handleWantsBeCreator() {
     </MainContent>
   </div>
 </template>
-~/modules/auth/composables/useSession/useSession
