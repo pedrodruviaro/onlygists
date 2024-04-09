@@ -12,6 +12,6 @@ definePageMeta({
 </script>
 
 <template>
-  {{ user.name ?? 'Carregando' }}
+  {{ user?.name ?? 'Carregando' }}
   <Panel />
 </template>

@@ -57,4 +57,3 @@ async function handleLogout() {
     </MainContent>
   </div>
 </template>
-~/modules/auth/composables/useSession/useSession

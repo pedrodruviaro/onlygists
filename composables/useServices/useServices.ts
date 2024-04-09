@@ -1,5 +1,6 @@
 import AuthService from '@/modules/auth/services/services'
 import UserService from '@/modules/users/services/services'
+import GistServices from '@/modules/gists/services/services'
 import type { Database } from '~/libs/supabase/schema'
 import axios from 'axios'
 
@@ -15,5 +16,7 @@ export function useServices() {
     }),
 
     users: UserService(supabaseClient, httpClient),
+
+    gists: GistServices(supabaseClient),
   }
 }
