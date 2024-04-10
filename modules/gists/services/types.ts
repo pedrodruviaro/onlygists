@@ -4,3 +4,5 @@ export type CreateOptions = HeadLine &
   Code & {
     profileId: string
   }
+
+export type UpdateOptions = Partial<HeadLine> & Partial<Code>

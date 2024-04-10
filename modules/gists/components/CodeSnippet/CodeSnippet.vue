@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Loader from './Loader.vue'
 import { common, createStarryNight } from '@wooorm/starry-night'
 import { toHtml } from 'hast-util-to-html'
 import '@wooorm/starry-night/style/light'
+import Loader from './Loader.vue'
 
 const DEFAULT_CODE_SNIPPET = `
-const message = 'Você precisa pagar para ter acesso a esse gist :)'
+const message = 'Você precisa pagar para ter acesso a esse gist :P'
 console.log(message)
 `
 
@@ -17,7 +17,7 @@ const props = withDefaults(
     lang: string
   }>(),
   {
-    isPaid: true,
+    isPaid: false,
     loading: false,
     code: DEFAULT_CODE_SNIPPET,
     lang: 'typescript',
@@ -27,7 +27,7 @@ const props = withDefaults(
 const loading = ref<boolean>(true)
 const htmlCode = ref<string>('')
 
-async function registerSyntaxHighLight() {
+const registerSyntaxHighlight = async () => {
   loading.value = true
 
   const starryNight = await createStarryNight(common)
@@ -35,18 +35,15 @@ async function registerSyntaxHighLight() {
   const tree = starryNight.highlight(props.code, scope!)
 
   htmlCode.value = toHtml(tree)
-
   loading.value = false
 }
 
 watch(
   () => props.code,
   () => {
-    registerSyntaxHighLight()
+    registerSyntaxHighlight()
   },
-  {
-    immediate: true,
-  },
+  { immediate: true },
 )
 </script>
 
@@ -64,6 +61,6 @@ watch(
       ></pre>
     </div>
 
-    <pre v-if="!props.isPaid" v-html="htmlCode" class="w-full rounded bg-gray-200 p-5 overflow-x-scroll"></pre>
+    <pre v-if="!props.isPaid" class="w-full rounded bg-gray-200 p-5 overflow-x-scroll" v-html="htmlCode"></pre>
   </Loader>
 </template>
