@@ -1,7 +1,7 @@
 <script setup lang="ts">
 //@ts-ignore
 import getProgrammingLanguage from 'detect-programming-language'
-import type { Gist, Headline } from '@/modules/gists/entities/Gist/Gist'
+import type { Gist, HeadLine } from '@/modules/gists/entities/Gist/Gist'
 import type { ZodFormattedError } from 'zod'
 import { computed, watch } from 'vue'
 
@@ -20,7 +20,7 @@ const emit = defineEmits<{
   (e: 'language-change', lang: string): void
 }>()
 
-const headline = defineModel<Headline>({
+const headline = defineModel<HeadLine>({
   required: true,
   default: {
     title: '',
@@ -30,7 +30,7 @@ const headline = defineModel<Headline>({
 })
 
 const extension = computed(() => {
-  const values = headline.value.tite.split('.')
+  const values = headline.value.title.split('.')
 
   if (values.length === 0) return ''
 
@@ -61,7 +61,7 @@ watch(
 
       <div class="flex flex-col gap-2">
         <label for="gist-price">Preço</label>
-        <SelectButton v-model="headline.price" :options="priceOptions" option-value="value" option-label="name" />
+        <SelectButton v-model="headline.price" :options="priceOptions" option-value="price" option-label="name" />
       </div>
     </div>
 

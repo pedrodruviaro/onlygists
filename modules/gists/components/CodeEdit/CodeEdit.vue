@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import type { Code } from '@/modules/gists/entities/Gist/Gist'
+import type { Gist } from '@/modules/gists/entities/Gist/Gist'
+import type { ZodFormattedError } from 'zod'
+
+const props = defineProps<{
+  errors?: ZodFormattedError<Gist>
+}>()
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
@@ -49,5 +55,8 @@ const code = defineModel<Code>({
       :default-language="code.lang"
       :language="code.lang"
     />
+    <small v-if="props.errors?.content">
+      {{ props.errors.content._errors[0] }}
+    </small>
   </div>
 </template>
