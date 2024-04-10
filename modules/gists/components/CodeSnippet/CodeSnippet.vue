@@ -39,9 +39,15 @@ async function registerSyntaxHighLight() {
   loading.value = false
 }
 
-onMounted(() => {
-  registerSyntaxHighLight()
-})
+watch(
+  () => props.code,
+  () => {
+    registerSyntaxHighLight()
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <template>
