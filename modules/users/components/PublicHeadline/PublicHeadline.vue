@@ -1,20 +1,11 @@
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    name?: string
-    avatarUrl?: string
-    bio?: string
-    city?: string
-    state?: string
-  }>(),
-  {
-    name: 'Pedro Ruviaro',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/82953655?v=4',
-    bio: 'Front end dev',
-    city: 'Faxinal do Soturno',
-    state: 'RS',
-  },
-)
+const props = defineProps<{
+  name?: string
+  avatarUrl?: string
+  bio?: string
+  city?: string
+  state?: string
+}>()
 </script>
 
 <template>

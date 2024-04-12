@@ -24,6 +24,24 @@ export function getMyselfAdapter(data: Row | null): User | null {
   }
 }
 
+export function readOneByUsernameAdapter(data: Row | null): User | null {
+  if (!data) return null
+
+  const address = data.address as unknown as Address
+
+  return {
+    id: data.id,
+    avatarUrl: data.avatar_url,
+    username: data.username,
+    name: data.name,
+    site: data.site ?? undefined,
+    phone: data.phone ?? undefined,
+    bio: data.bio ?? undefined,
+    address,
+    createdAt: new Date(data.created_at),
+  }
+}
+
 export function searchAddressByZipCodeAddapter(data: SearchAddressResponse): Address {
   return {
     zipCode: data.cep,

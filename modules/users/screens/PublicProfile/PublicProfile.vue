@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PublicHeadline from '@/modules/users/components/PublicHeadline/PublicHeadline.vue'
+import PublicHeadlineEmpty from '@/modules/users/components/PublicHeadline/Empty.vue'
 import WidgetGroup from '@/modules/reports/components/Widget/Group/Group.vue'
 import WidgetGroupLoader from '@/modules/reports/components/Widget/Group/Loader.vue'
 import WidgetCondensed from '@/modules/reports/components/Widget/Condensed/Condensed.vue'
@@ -9,6 +10,13 @@ import GistCardItem from '@/modules/gists/components/Card/Item/Item.vue'
 
 const route = useRoute()
 const router = useRouter()
+const services = useServices()
+
+const { data: user } = await useAsyncData('user-public-profile', () => {
+  const username = route.params.username as string
+
+  return services.users.readOneByUsername(username)
+})
 
 function handleNavigateToDetail(id: string) {
   const { username } = route.params
@@ -18,7 +26,17 @@ function handleNavigateToDetail(id: string) {
 </script>
 
 <template>
-  <PublicHeadline />
+  <PublicHeadline
+    v-if="user"
+    :avatar-url="user.avatarUrl"
+    :name="user.name"
+    :bio="user.bio"
+    :city="user.address?.city"
+    :state="user.address?.state"
+    class="my-10"
+  />
+
+  <PublicHeadlineEmpty v-else class="my-10" />
 
   <WidgetGroup>
     <WidgetGroupLoader :loading="false" :amount="3">

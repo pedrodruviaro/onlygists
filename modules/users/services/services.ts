@@ -1,4 +1,4 @@
-import { getMyselfAdapter, searchAddressByZipCodeAddapter } from './adapters'
+import { getMyselfAdapter, searchAddressByZipCodeAddapter, readOneByUsernameAdapter } from './adapters'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '~/libs/supabase/schema'
 import type { AxiosInstance } from 'axios'
@@ -10,6 +10,12 @@ export default (client: SupabaseClient<Database>, httpClient: AxiosInstance) => 
     const response = await client.from('profiles').select('*').eq('id', id).limit(1).single()
     const user = getMyselfAdapter(response.data)
 
+    return user
+  },
+
+  async readOneByUsername(username: string) {
+    const response = await client.from('profiles').select().eq('username', username).limit(1).single()
+    const user = readOneByUsernameAdapter(response.data)
     return user
   },
 
