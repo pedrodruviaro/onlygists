@@ -13,6 +13,6 @@ onMounted(() => {
 
 <template>
   <MainContent #content>
-    <p class="text-gray-800 font-[Inter]">Redirectionando...</p>
+    <p class="text-gray-800 font-[Inter]">Redirecionando...</p>
   </MainContent>
 </template>
