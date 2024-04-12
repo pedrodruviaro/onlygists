@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid'
+import { readAllAdapter, readOneAdapter } from './adapters'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '~/libs/supabase/schema'
-import type { CreateOptions, UpdateOptions } from './types'
-import { readOneAdapter, type ReadOneRow } from './adapters'
+import type { CreateOptions, RealAllOptions, UpdateOptions } from './types'
+import type { ReadAllRow, ReadOneRow } from './adapters'
 
 export default (client: SupabaseClient<Database>) => ({
   async create({ title, description, price, content, lang, profileId }: CreateOptions) {
@@ -22,6 +23,29 @@ export default (client: SupabaseClient<Database>) => ({
     })
 
     return { id }
+  },
+
+  async readAll({ username, from = 0, to = 0 }: RealAllOptions) {
+    const [totalResponse, gistResponse] = await Promise.all([
+      //count
+      client
+        .from('gists')
+        .select('profiles!inner(id, username)', { count: 'exact', head: true })
+        .eq('profiles.username', username),
+      //gists
+      client
+        .from('gists')
+        .select('id, title, description, is_paid, price, lang, created_at, profiles!inner(id, username)')
+        .eq('profiles.username', username)
+        .order('created_at', { ascending: true })
+        .range(from, to)
+        .returns<ReadAllRow[]>(),
+    ])
+
+    return {
+      total: totalResponse.count ?? 0,
+      results: readAllAdapter(gistResponse.data),
+    }
   },
 
   async readOne(id: string) {

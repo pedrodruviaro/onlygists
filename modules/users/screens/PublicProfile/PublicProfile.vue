@@ -7,16 +7,47 @@ import WidgetCondensed from '@/modules/reports/components/Widget/Condensed/Conde
 import GistCardGroup from '@/modules/gists/components/Card/Group/Group.vue'
 import GistCardGroupLoader from '@/modules/gists/components/Card/Group/Loader.vue'
 import GistCardItem from '@/modules/gists/components/Card/Item/Item.vue'
+import { useGistsReport } from '@/modules/reports/composables/useGistsReport/useGistsReport'
+import { useGistList } from '@/modules/gists/composables/useGistList/useGistList'
+import { useScroll } from '@vueuse/core'
 
 const route = useRoute()
 const router = useRouter()
 const services = useServices()
 
-const { data: user } = await useAsyncData('user-public-profile', () => {
-  const username = route.params.username as string
+const usernameFromRoute = route.params.username as string
 
+const { data: user } = await useAsyncData('user-public-profile', () => {
+  const username = usernameFromRoute
   return services.users.readOneByUsername(username)
 })
+
+const {
+  loading: reportsLoading,
+  totalGists,
+  totalFreeGists,
+  totalPaidGists,
+} = useGistsReport({ user, isMyself: false })
+
+const {
+  loading: loadingGists,
+  loadingMore: loadingMoreGists,
+  gists,
+  fetchMoreGistsByUsername,
+} = useGistList({ username: usernameFromRoute })
+
+const { arrivedState } = useScroll(window, {
+  offset: { bottom: 100 },
+})
+
+watch(
+  () => arrivedState.bottom,
+  () => {
+    if (!arrivedState.bottom) return
+
+    fetchMoreGistsByUsername()
+  },
+)
 
 function handleNavigateToDetail(id: string) {
   const { username } = route.params
@@ -38,26 +69,26 @@ function handleNavigateToDetail(id: string) {
 
   <PublicHeadlineEmpty v-else class="my-10" />
 
-  <WidgetGroup>
-    <WidgetGroupLoader :loading="false" :amount="3">
-      <WidgetCondensed label="Gists no total" :value="10" />
-      <WidgetCondensed label="Gists gratuitos" :value="2" />
-      <WidgetCondensed label="Gists pagos" :value="8" />
+  <WidgetGroup v-if="user">
+    <WidgetGroupLoader :loading="reportsLoading" :amount="3">
+      <WidgetCondensed label="Gists no total" :value="totalGists" />
+      <WidgetCondensed label="Gists gratuitos" :value="totalFreeGists" />
+      <WidgetCondensed label="Gists pagos" :value="totalPaidGists" />
     </WidgetGroupLoader>
   </WidgetGroup>
 
-  <WidgetDefault title="Todos os Gists">
+  <WidgetDefault title="Todos os Gists" v-if="gists.length !== 0">
     <GistCardGroup>
-      <GistCardGroupLoader :loading="false">
+      <GistCardGroupLoader :loading="loadingGists">
         <GistCardItem
           @tap="handleNavigateToDetail"
-          id="123"
-          title="useCurrentUser.ts"
-          description="Pega o **usuário** atual logado na aplicação"
-          :price="10"
-          lang="typescript"
-          v-for="n in 10"
-          :key="n"
+          v-for="gist in gists"
+          :key="gist.id"
+          :id="gist.id"
+          :title="gist.title"
+          :description="gist.description"
+          :price="gist.price"
+          :lang="gist.lang"
         />
       </GistCardGroupLoader>
     </GistCardGroup>

@@ -6,3 +6,9 @@ export type CreateOptions = HeadLine &
   }
 
 export type UpdateOptions = Partial<HeadLine> & Partial<Code>
+
+export type RealAllOptions = {
+  username: string
+  to?: number
+  from?: number
+}

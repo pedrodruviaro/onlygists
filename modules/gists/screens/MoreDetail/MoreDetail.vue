@@ -64,7 +64,7 @@ function navigateToGistEdit() {
   <div class="flex flex-col gap-2 md:flex-row" v-if="gist">
     <Button
       v-if="user?.username !== route.params.username"
-      label="Comprar por 10"
+      :label="`Comprar por ${gist.price}`"
       class="mt-5 w-full md:w-auto"
       icon="pi pi-shopping-bag"
       icon-pos="right"
