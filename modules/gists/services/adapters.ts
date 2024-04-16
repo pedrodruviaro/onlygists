@@ -21,10 +21,11 @@ export function readOneAdapter(data: ReadOneRow | null): GistVirtual | null {
     profiles: {
       id: data.profiles?.id,
       username: data.profiles?.username,
+      name: data.profiles?.name,
     },
     lang: data.lang,
     content: data.content,
-    createdAt: new Date(data.created_at),
+    createdAt: data.created_at ? new Date(data.created_at) : new Date(),
   }
 }
 

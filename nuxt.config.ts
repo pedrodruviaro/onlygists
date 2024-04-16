@@ -1,7 +1,14 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'nuxt-primevue', '@nuxtjs/supabase'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts',
+    'nuxt-primevue',
+    '@nuxtjs/supabase',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/seo',
+  ],
 
   runtimeConfig: {
     public: {
@@ -37,5 +44,13 @@ export default defineNuxtConfig({
 
   supabase: {
     redirect: false,
+  },
+
+  site: {
+    url: process.env.SITE_URL,
+  },
+
+  ogImage: {
+    fonts: ['Inter:400', 'Inter:700'],
   },
 })
