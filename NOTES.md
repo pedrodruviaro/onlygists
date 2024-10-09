@@ -10,3 +10,5 @@
 
 - Layout -> encapsulamento de lógica
 - HOC -> encapsulamentode loading
+
+- CodeSnippet => duplo loading (interno e externo)
