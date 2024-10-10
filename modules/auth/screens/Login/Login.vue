@@ -2,10 +2,17 @@
 import SocialForm from '~/modules/auth/components/SocialForm/SocialForm.vue'
 
 const loading = ref(false)
+const services = useServices()
 
 const handleGithubLogin = async () => {
-  loading.value = true
-  // @TODO -> Login with Github
+  try {
+    loading.value = true
+    services.auth.signInWithGithub()
+  } catch (error) {
+    console.log(error)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 

@@ -4,12 +4,21 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', '@nuxtjs/google-fonts'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
+
+  runtimeConfig: {
+    public: {
+      nodeEnv: process.env.NODE_ENV,
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
+      siteUrl: process.env.SITE_URL,
+    },
+  },
 
   css: ['primeicons/primeicons.css'],
 
   imports: {
-    dirs: ['./composables/useMarkdown'],
+    dirs: ['./composables/useMarkdown', './composables/useServices'],
   },
 
   googleFonts: {
@@ -29,5 +38,9 @@ export default defineNuxtConfig({
       as: 'lara',
       from: '@/assets/presets/lara/',
     },
+  },
+
+  supabase: {
+    redirect: false,
   },
 })

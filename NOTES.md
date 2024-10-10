@@ -37,3 +37,9 @@ Para rodar novas adições de migrations
 - trocar [auth] site_url para -> http://localhost:3000/auth/github
 - configurar [auth.external.github] com os dados corretos
 - redirect_uri = "http://localhost:54321/auth/v1/callback" (mesma colocada no github)
+
+### Geração de tipos do banco
+
+- tipos do banco !== tipos da aplicação (entidades)
+- "db:generate-types": "npx supabase gen types typescript --local > ./libs/supabase/schema.ts"
+- sempre que houver mudança ou adição de migration, rodar o comando para baixar os tipos novamente
