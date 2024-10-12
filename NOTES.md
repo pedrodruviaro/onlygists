@@ -53,3 +53,8 @@ Para rodar novas adições de migrations
 ### Adapters
 
 - função que recebe um tipo e retorna outro tipo
+
+### User provide/inject
+
+- provido no composable
+- todo mundo abaixo de onde o composable é instanciado recebe o inject
