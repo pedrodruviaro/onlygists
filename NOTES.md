@@ -43,3 +43,13 @@ Para rodar novas adições de migrations
 - tipos do banco !== tipos da aplicação (entidades)
 - "db:generate-types": "npx supabase gen types typescript --local > ./libs/supabase/schema.ts"
 - sempre que houver mudança ou adição de migration, rodar o comando para baixar os tipos novamente
+
+### Arquitetura dos layouts -> default, checkout e admin
+
+- _default_ -> renderiza apenas o conteúdo interno
+- _admin_ -> só para rodas autenticadas
+- _checkout_ -> usuário pode ou não estar logado (componentes dinâmicos)
+
+### Adapters
+
+- função que recebe um tipo e retorna outro tipo
