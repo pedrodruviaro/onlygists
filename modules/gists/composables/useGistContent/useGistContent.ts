@@ -1,10 +1,10 @@
 import type { GistVirtual } from '~/modules/gists/entities/Gist/Gist'
 
-interface UseGistContent {
+interface UseGistContentOptions {
   gist: Ref<GistVirtual | undefined | null>
 }
 
-export function useGistContent({ gist }: UseGistContent) {
+export function useGistContent({ gist }: UseGistContentOptions) {
   const { logAndTrack } = useLogger()
   const services = useServices()
 
