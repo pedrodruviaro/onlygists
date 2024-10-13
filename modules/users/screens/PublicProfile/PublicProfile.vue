@@ -3,6 +3,7 @@ import WidgetGroup from '~/modules/reports/components/Widget/Group/Group.vue'
 import WidgetLoader from '~/modules/reports/components/Widget/Loader/Loader.vue'
 import WidgetCondensed from '~/modules/reports/components/Widget/Condensed/Condensed.vue'
 import PublicHeadline from '~/modules/users/components/PublicHeadline/PublicHeadline.vue'
+import PublicHeadlineEmpty from '~/modules/users/components/PublicHeadline/Empty.vue'
 import GistCardGroup from '~/modules/gists/components/Card/Group/Group.vue'
 import GistCardGroupLoader from '~/modules/gists/components/Card/Group/Loader.vue'
 import GistCardItem from '~/modules/gists/components/Card/Item/Item.vue'
@@ -14,16 +15,26 @@ const username = computed(() => route.params.username as string)
 const handleNavigateToGistDetail = (id: string) => {
   router.push(`/${username.value}/gists/${id}`)
 }
+
+const services = useServices()
+
+const { data: user } = await useAsyncData('user-public-profile', () => {
+  return services.users.readOneByUsername(username.value)
+})
 </script>
 
 <template>
-  <PublicHeadline
-    name="pedrodruviaro"
-    avatarUrl="https://avatars.githubusercontent.com/u/82953655?v=4"
-    bio="Software engineer"
-    city="São Paulo"
-    state="SP"
-  />
+  <div class="my-10">
+    <PublicHeadline
+      v-if="user"
+      :name="user?.name"
+      :avatarUrl="user?.avatarUrl"
+      :bio="user?.bio"
+      :city="user?.address?.city"
+      :state="user?.address?.state"
+    />
+    <PublicHeadlineEmpty v-else />
+  </div>
 
   <WidgetGroup>
     <WidgetLoader :loading="false" :amount="3">
