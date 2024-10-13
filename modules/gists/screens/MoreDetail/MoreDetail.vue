@@ -41,7 +41,6 @@ onMounted(() => {
 </script>
 
 <template>
-  {{ gistContent }}
   <PublicHeadlineLoader :loading="status === 'pending'">
     <PublicHeadline
       v-if="gist"
