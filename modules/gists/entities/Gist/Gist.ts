@@ -9,7 +9,7 @@ export interface Gist {
   lang: string
   price: number
   content: string
-  createAt: Date
+  createdAt: Date
 }
 
 // @ALIAS

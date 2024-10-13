@@ -34,13 +34,20 @@ const registerSyntaxHightlight = async () => {
 
   const starryNight = await createStarryNight(common)
   const scope = starryNight.flagToScope(props.lang)
-  const tree = starryNight.highlight(props.code, scope!)
+  const codeToRender = props.isPaid ? DEFAULT_CODE_SNIPPET : props.code
+  const tree = starryNight.highlight(codeToRender, scope!)
 
   htmlCode.value = toHtml(tree)
   loading.value = false
 }
 
-onMounted(() => registerSyntaxHightlight())
+watch(
+  () => props.code,
+  () => {
+    registerSyntaxHightlight()
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
