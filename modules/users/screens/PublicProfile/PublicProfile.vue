@@ -7,6 +7,7 @@ import PublicHeadlineEmpty from '~/modules/users/components/PublicHeadline/Empty
 import GistCardGroup from '~/modules/gists/components/Card/Group/Group.vue'
 import GistCardGroupLoader from '~/modules/gists/components/Card/Group/Loader.vue'
 import GistCardItem from '~/modules/gists/components/Card/Item/Item.vue'
+import { useGistsReport } from '~/modules/reports/composables/useGistsReport/useGistsReport'
 
 const router = useRouter()
 const route = useRoute()
@@ -21,6 +22,13 @@ const services = useServices()
 const { data: user } = await useAsyncData('user-public-profile', () => {
   return services.users.readOneByUsername(username.value)
 })
+
+const {
+  loading: reportsLoading,
+  totalGists,
+  totalFreeGists,
+  totalPaidGists,
+} = useGistsReport({ user, isMyself: false })
 </script>
 
 <template>
@@ -37,10 +45,10 @@ const { data: user } = await useAsyncData('user-public-profile', () => {
   </div>
 
   <WidgetGroup>
-    <WidgetLoader :loading="false" :amount="3">
-      <WidgetCondensed :value="12" label="Gists no total" />
-      <WidgetCondensed :value="5" label="Gists gratuitos" />
-      <WidgetCondensed :value="7" label="Gists pagos" />
+    <WidgetLoader :loading="reportsLoading" :amount="3">
+      <WidgetCondensed :value="totalGists" label="Gists no total" />
+      <WidgetCondensed :value="totalFreeGists" label="Gists gratuitos" />
+      <WidgetCondensed :value="totalPaidGists" label="Gists pagos" />
     </WidgetLoader>
   </WidgetGroup>
 
