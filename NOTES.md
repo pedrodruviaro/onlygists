@@ -58,3 +58,32 @@ Para rodar novas adições de migrations
 
 - provido no composable
 - todo mundo abaixo de onde o composable é instanciado recebe o inject
+
+### Arquitetura modular
+
+- estrutura flexível
+- escalável
+
+![alt text](/public/notes/image-1.png)
+
+- um composable por ação
+
+  - pode ser mais de uma ação por composable
+
+- composables são mais fáceis de testar
+
+- camada de serviço separada e um adapter
+
+  - desacopla o client
+  - trocar o adapter fica simples
+  - projeto fica desacoplado da entidade do banco
+  - separação de entidades
+
+- useServices => faz a injeção de dependência via parâmetro de função
+  - aumenta a coesão, baixa o acoplamento
+
+#### Atividade
+
+- tela de listagem de todos os creators
+
+  ![alt text](/public/notes/image.png)
