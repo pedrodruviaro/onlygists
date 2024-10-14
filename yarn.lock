@@ -1960,7 +1960,7 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.5.11.tgz#464b840afc89be9373addff9eeb9dfc98bf3fe2e"
   integrity sha512-W8GgysJVnFo81FthhzurdRAWP/byq3q2qIw70e0JWblzVhjgOMiC2GyovXrZTFQJnFVryYaKGP3Tc9vYzYm6PQ==
 
-"@vueuse/core@^11.1.0":
+"@vueuse/core@11.1.0", "@vueuse/core@^11.1.0":
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-11.1.0.tgz#a104f33c899a15f3b28d3eb7b20738501a3a5035"
   integrity sha512-P6dk79QYA6sKQnghrUz/1tHi0n9mrb/iO1WTMk/ElLmTyNqgDeSZ3wcDf6fRBGzRJbeG1dxzEOvLENMjr+E3fg==
@@ -1974,6 +1974,17 @@
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-11.1.0.tgz#ad367d2a51d985129724425923b3cf95f0faf27b"
   integrity sha512-l9Q502TBTaPYGanl1G+hPgd3QX5s4CGnpXriVBR5fEZ/goI6fvDaVmIl3Td8oKFurOxTmbXvBPSsgrd6eu6HYg==
+
+"@vueuse/nuxt@^11.1.0":
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@vueuse/nuxt/-/nuxt-11.1.0.tgz#73b468dfa13f4a158611e86bc9f9ef9799429198"
+  integrity sha512-ZPYigcqgPPe9vk9nBHLF8p0zshX8qvWV/ox1Y4GdV4k2flPiw7+2THNTpU2NZDBXSOXlhB2sao+paGCsvJm/Qw==
+  dependencies:
+    "@nuxt/kit" "^3.13.2"
+    "@vueuse/core" "11.1.0"
+    "@vueuse/metadata" "11.1.0"
+    local-pkg "^0.5.0"
+    vue-demi ">=0.14.10"
 
 "@vueuse/shared@11.1.0":
   version "11.1.0"
@@ -1991,11 +2002,6 @@
     import-meta-resolve "^4.0.0"
     vscode-oniguruma "^2.0.0"
     vscode-textmate "^9.0.0"
-
-D@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/D/-/D-1.0.0.tgz#c348a4e034f72847be51206fc530fc089e9cc2a9"
-  integrity sha512-nQvrCBu7K2pSSEtIM0EEF03FVjcczCXInMt3moLNFbjlWx6bZrX72uT6/1uAXDbnzGUAx9gTyDiQ+vrFi663oA==
 
 abbrev@1:
   version "1.1.1"

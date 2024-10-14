@@ -33,3 +33,32 @@ export function readOneAdapter(data: ReadOneRow | null): GistVirtual | null {
     createdAt: data.created_at ? new Date(data.created_at) : new Date(),
   }
 }
+
+export type ReadAllRow = GistRow & {
+  profiles: ProfileRow | null
+}
+
+export function readAllAdapter(values: ReadAllRow[] | null): GistVirtual[] {
+  if (!values) return []
+
+  const newValues = values.map((data) => {
+    return {
+      id: data.id,
+      title: data.title,
+      profileId: data.profile_id ?? '',
+      description: data.description,
+      isPaid: data.is_paid,
+      price: data.price,
+      profiles: {
+        id: data.profiles?.id,
+        name: data.profiles?.name,
+        username: data.profiles?.username,
+      },
+      lang: data.lang,
+      content: data.content,
+      createdAt: data.created_at ? new Date(data.created_at) : new Date(),
+    }
+  })
+
+  return newValues
+}

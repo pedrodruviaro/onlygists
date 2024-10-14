@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', '@nuxtjs/google-fonts', '@nuxtjs/supabase', '@vueuse/nuxt'],
 
   runtimeConfig: {
     public: {

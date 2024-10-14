@@ -8,6 +8,7 @@ import GistCardGroup from '~/modules/gists/components/Card/Group/Group.vue'
 import GistCardGroupLoader from '~/modules/gists/components/Card/Group/Loader.vue'
 import GistCardItem from '~/modules/gists/components/Card/Item/Item.vue'
 import { useGistsReport } from '~/modules/reports/composables/useGistsReport/useGistsReport'
+import { useGistList } from '~/modules/gists/composables/useGistList/useGistList'
 
 const router = useRouter()
 const route = useRoute()
@@ -29,9 +30,29 @@ const {
   totalFreeGists,
   totalPaidGists,
 } = useGistsReport({ user, isMyself: false })
+
+const {
+  loading: loadingGists,
+  loadingMore,
+  gists,
+  fetchMoreGistsByUsername,
+} = useGistList({ username: username.value })
+
+const { arrivedState } = useScroll(window, {
+  offset: { bottom: 100 },
+})
+
+watch(
+  () => arrivedState.bottom,
+  () => {
+    if (!arrivedState.bottom) return
+    fetchMoreGistsByUsername()
+  },
+)
 </script>
 
 <template>
+  {{ gists.length }}
   <div class="my-10">
     <PublicHeadline
       v-if="user"
@@ -44,7 +65,7 @@ const {
     <PublicHeadlineEmpty v-else />
   </div>
 
-  <WidgetGroup>
+  <WidgetGroup v-if="user">
     <WidgetLoader :loading="reportsLoading" :amount="3">
       <WidgetCondensed :value="totalGists" label="Gists no total" />
       <WidgetCondensed :value="totalFreeGists" label="Gists gratuitos" />
@@ -52,16 +73,16 @@ const {
     </WidgetLoader>
   </WidgetGroup>
 
-  <WidgetDefault title="Todos os gists">
+  <WidgetDefault title="Todos os gists" v-if="gists.length !== 0" class="pb-20">
     <GistCardGroup>
-      <GistCardGroupLoader :loading="false">
+      <GistCardGroupLoader :loading="loadingGists">
         <GistCardItem
-          v-for="i in 10"
-          id="123"
-          title="useCurrentUser.ts"
-          description="hook para pegar o usuário **logado**"
-          lang="typescript"
-          :price="10"
+          v-for="gist in gists"
+          :id="gist.id"
+          :title="gist.title"
+          :description="gist.description"
+          :lang="gist.lang"
+          :price="gist.price"
           @tap="handleNavigateToGistDetail"
         />
       </GistCardGroupLoader>
