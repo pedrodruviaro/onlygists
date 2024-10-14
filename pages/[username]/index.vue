@@ -4,6 +4,10 @@ import PublicProfile from '~/modules/users/screens/PublicProfile/PublicProfile.v
 definePageMeta({
   layout: 'checkout',
 })
+
+useSeoMeta({
+  title: 'Perfil do usuário',
+})
 </script>
 
 <template>

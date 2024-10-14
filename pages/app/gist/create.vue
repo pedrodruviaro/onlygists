@@ -5,6 +5,10 @@ definePageMeta({
   layout: 'admin',
   middleware: ['auth'],
 })
+
+useSeoMeta({
+  title: 'Criar novo gist',
+})
 </script>
 
 <template>

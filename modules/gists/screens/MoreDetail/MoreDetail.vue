@@ -38,6 +38,21 @@ onMounted(() => {
   if (success_payment) isPaymentSuccessfully.value = true
   if (fail_payment) isPaymentFailed.value = true
 })
+
+defineOgImage({
+  component: 'GistDetail',
+  props: {
+    title: `${gist.value?.title} by @${gist.value?.profiles.username}`,
+    description: `Veja o gist de ${gist.value?.profiles.name} no onlygists`,
+  },
+})
+
+useSeoMeta({
+  title: `${gist.value?.title} by @${gist.value?.profiles.name}`,
+  ogTitle: `${gist.value?.title} by @${gist.value?.profiles.name}`,
+  description: `Veja o gist de ${gist.value?.profiles.name} no onlygists`,
+  ogDescription: `Veja o gist de ${gist.value?.profiles.name} no onlygists`,
+})
 </script>
 
 <template>

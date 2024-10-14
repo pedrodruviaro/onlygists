@@ -5,6 +5,10 @@ definePageMeta({
   layout: 'admin',
   middleware: ['auth'],
 })
+
+useSeoMeta({
+  title: 'Editar Perfil',
+})
 </script>
 
 <template>

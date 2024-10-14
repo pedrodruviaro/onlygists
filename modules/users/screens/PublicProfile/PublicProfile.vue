@@ -49,6 +49,22 @@ watch(
     fetchMoreGistsByUsername()
   },
 )
+
+defineOgImage({
+  component: 'PublicProfile',
+  props: {
+    avatarUrl: user.value?.avatarUrl,
+    author: user.value?.name,
+    bio: user.value?.bio,
+  },
+})
+
+useSeoMeta({
+  title: `${user.value?.name} - @${user.value?.username}`,
+  ogTitle: `${user.value?.name} - @${user.value?.username}`,
+  description: `Veja os gists de ${user.value?.name} no onlygists`,
+  ogDescription: `Veja os gists de ${user.value?.name} no onlygists`,
+})
 </script>
 
 <template>

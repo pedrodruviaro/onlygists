@@ -3,6 +3,10 @@ import OAuthRedirect from '~/modules/auth/screens/OAuthRedirect/OAuthRedirect.vu
 definePageMeta({
   layout: 'default',
 })
+
+useSeoMeta({
+  title: 'Redirecionando...',
+})
 </script>
 
 <template>

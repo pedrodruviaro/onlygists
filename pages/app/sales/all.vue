@@ -5,6 +5,10 @@ definePageMeta({
   layout: 'admin',
   middleware: ['auth'],
 })
+
+useSeoMeta({
+  title: 'Minhas vendas',
+})
 </script>
 
 <template>
