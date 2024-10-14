@@ -11,7 +11,7 @@ export function useGistList({ username }: UseGistListOptions) {
   const loading = ref<boolean>(true)
   const loadingMore = ref<boolean>(false)
 
-  const PAGE_COUNT = 3
+  const PAGE_COUNT = 4
   const page = ref<number>(0)
 
   const gists = ref<GistVirtual[]>([])
