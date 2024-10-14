@@ -15,7 +15,7 @@ const route = useRoute()
 const username = computed(() => route.params.username as string)
 
 const handleNavigateToGistDetail = (id: string) => {
-  router.push(`/${username.value}/gists/${id}`)
+  router.push(`/${username.value}/gist/${id}`)
 }
 
 const services = useServices()
@@ -52,7 +52,6 @@ watch(
 </script>
 
 <template>
-  {{ gists.length }}
   <div class="my-10">
     <PublicHeadline
       v-if="user"

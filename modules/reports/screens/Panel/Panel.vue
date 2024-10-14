@@ -23,7 +23,7 @@ const {
 const router = useRouter()
 
 const handleNavigateToGistDetail = (id: string) => {
-  router.push(`/${user.value?.username}/gists/${id}`)
+  router.push(`/${user.value?.username}/gist/${id}`)
 }
 
 const {
